@@ -1,0 +1,23 @@
+version: '3'
+
+networks:
+  impacta:
+    driver: bridge
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    restart: always
+    networks:
+      - impacta
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=root
+      - MYSQL_TCP_PORT=3306
+  nginx:
+    image: nginx
+    restart: always
+    networks:
+      - impacta
+    ports:
+      - 8080:80
